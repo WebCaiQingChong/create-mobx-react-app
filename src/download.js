@@ -1,8 +1,8 @@
 const download = require('download-git-repo')
-const tem = 'WebCaiQingChong/algorithms'
-module.exports = function(target) {
+const config = require('./config')
+module.exports = function(target, type) {
   return new Promise((resolve, reject) => {
-    download(tem, target, err => {
+    download(config.TEM_LIST[type].addr, target, {clone: true}, err => {
       if (err) {
         reject(err)
       } else {

@@ -1,21 +1,18 @@
 const fsext = require('fs-extra')
-const fs = require('fs')
 const message = require('./message.js')
 const ora = require('ora')
 const download = require('./download')
 const confirm = require('./confirm')
-const copyFile = require('./copyFile')
 module.exports = async function(dirName) {
   if (fsext.pathExistsSync(dirName)) {
     message.warn(`this project name ${dirName} has already existed, please change the project name`)
   } else {
+    const { clientType } = await confirm()
     const spinner = ora('is downloading template').start()
-    // const { clientType } = await confirm([])
-    download(dirName)
+    download(dirName, clientType)
       .then(() => {
-        message.success('success')
-        spinner.succeed('template is doanload success')
-        copyFile(`./${dirName}`, '/')
+        spinner.succeed('template doanload success')
+        message.info('please enjoy your happy coding~~')
       })
       .catch(err => {
         message.error(err)

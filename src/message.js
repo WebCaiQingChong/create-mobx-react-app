@@ -5,15 +5,15 @@ const log = msg => {
 }
 module.exports = {
   error(err) {
-    log(`\n${chalk.red.bold(err)}`)
+    log(`${chalk.red.bold(err)}\n`)
   },
   success(msg) {
-    log(`\n${chalk.green.bold(msg)}`)
+    log(`${chalk.green.bold(msg)}\n`)
   },
   warn(msg) {
-    log(`\n${chalk.yellow.bold(msg)}`)
+    log(`${chalk.yellow.bold(msg)}\n`)
   },
   info(msg) {
-    log(`\n${chalk.blue(msg)}`)
+    log(`${chalk.blue(msg)}\n`)
   }
 }
