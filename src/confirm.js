@@ -1,19 +1,17 @@
-const inquirer = require('inquirer')
-const message = require('./message')
+
 const config = require('./config')
+const insertConfig = require('./insertConfig')
+let temList
+if (insertConfig) {
+  temList = {...config.TEM_LIST, ...insertConfig.TEM_LIST}
+} else {
+  temList = {...config.TEM_LIST}
+}
 const clientType = {
   type: 'list',
   name: 'clientType',
   message: `请选择项目类型       `,
-  choices: Object.keys(config.TEM_LIST)
+  choices: Object.keys(temList)
 }
 
-module.exports = function(type = []) {
-  try {
-    const inputType = [clientType, ...type]
-    return inquirer.prompt([inputType])
-  } catch (err) {
-    message.error(err)
-    process.exit()
-  }
-}
+module.exports = clientType

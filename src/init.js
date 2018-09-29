@@ -3,12 +3,13 @@ const message = require('./message.js')
 const ora = require('ora')
 const download = require('./download')
 const confirm = require('./confirm')
+const inquirer = require('inquirer')
 module.exports = async function(dirName) {
   if (fsext.pathExistsSync(dirName)) {
     message.warn(`this project name ${dirName} has already existed, please change the project name`)
   } else {
-    const { clientType } = await confirm()
-    const spinner = ora('is downloading template').start()
+    const { clientType } = await inquirer.prompt([confirm])
+    const spinner = ora('is downloading template \n').start()
     download(dirName, clientType)
       .then(() => {
         spinner.succeed('template doanload success')
